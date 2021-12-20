@@ -16,6 +16,9 @@ pip list 입력
 - 패키지 설치하는 법.
 ex) pip install django.
 
+- pip(Python Install Package) 정의.   
+파이썬의 오픈소스 저장소인 PyPI(Python Package Index)에 있는 SW 패키지를 설치하고 관리해주는 명령어.  
+
 - 가상환경 비활성화하기.
 deactivate 치면 됨.
 
