@@ -27,8 +27,8 @@ HTTP(Hypertext Transfer Protocol)는 TCP(transmission contro protocol)/IP(intern
 바디 => 보통 HTML 텍스트이며 생략 가능함.  
 
 - HTTP 메소드 종류. (요청라인에 쓰이는 method)  
-GET: 리소스 취득(Read)  
-POST: 리소스 생성, 리소스 데이터 추가(Create)
+GET: 리소스 취득(Read), GET방식의 특징으로는 대표적으로 URL에 Parameter를 붙여서 전송한다는 것입니다.    
+POST: 리소스 생성, 리소스 데이터 추가(Create), POST 방식의 특징으로는 대표적으로 GET 방식과는 달리 body영역에 데이터를 실어 보낸다는 점입니다.  
 PUT: 리소스 변경(Update)  
 DELETE: 리소스 삭제(Delete)
 
