@@ -21,11 +21,14 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-itje42991lnu=0qj94ne%ks40mn(md@bu+6#of=*ye^k7(nlo%'
+# 이 항목은 프로젝트 내에서 암호화가 필요할 때 사용되는 항목으로 외부에 노출되면 안됨.
+# 따라서 운영 모드에서는 환경 변수에 저장하거나 파일에 저장한 후 다른 방식으로 읽어 들어야함.
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = True # 운영 모드에서는 False로 바꿔서 정보 노출을 방지해야 함.
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [] 
+# DEBUG 가 True면 []라고 설정되어도 'localhost' 로 읽지만 False인 경우에는 IP, 도메인 주소를 적어줘야함.
 
 
 # Application definition
