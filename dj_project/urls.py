@@ -15,7 +15,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from django.urls.conf import include
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path('', include('bitcoin.urls')),
+    path('admin/', admin.site.urls),   # path 순서에 유의해야함.
+    
 ]

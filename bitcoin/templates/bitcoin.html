@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>김프</title>
+    <script src="{% static 'jquery-3.6.0.min.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'bitcoin.css' %}" media="screen">
+</head>
+<body>
+    <div>
+        업비트 비트코인 현재가 : <span id="upbit_price" price1="0"></span> krw
+    </div>
+
+    <div>
+        바이낸스 비트코인 현재가 : <span id="binance_price" price2="0"></span> krw (<span id="usdt"></span> usdt)
+    </div>
+
+    <div>
+        김프: <span id="kimp"></span> % 
+    </div>
+    
+    <div>
+        환율: <span id="rate"></span> krw 
+    </div>
+
+    <script src="{% static 'bitcoin.js' %}"></script>
+    
+</body>
+</html>

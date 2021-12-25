@@ -34,6 +34,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'bitcoin',  # 항상 ',' 넣어야됨 아니면 오류 뜸 !!
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
