@@ -1,74 +1,84 @@
-$.get( "http://api.exchangeratesapi.io/v1/latest?access_key=555fd5a9f04e93dbba51c93977ae0b30&symbol=", function(rate) {
-        let base_eur_krw = JSON.stringify(rate.rates.KRW);
+
+    $(document).ready(function(){
+
+		$.get("http://api.exchangeratesapi.io/v1/latest?access_key=555fd5a9f04e93dbba51c93977ae0b30&symbol=", function(rate) {
+        let base_eur_krw = JSON.stringify(rate.rates.KRW); 
         let base_eur_usd = JSON.stringify(rate.rates.USD);
             
-        let exchange_rate = Math.round(base_eur_krw/base_eur_usd);
+        let exchange_rate = Math.round(base_eur_krw/base_eur_usd); 
 
-        document.getElementById("rate").innerHTML = exchange_rate;
+        document.getElementById("rates").innerHTML = exchange_rate; 
+        $("#rates").attr("rates_pr", exchange_rate); // rates_pr 속성값을 exchange_rate로 변환.
+		})
 
-        function upbit_funcname() {
-            var socket1 = new WebSocket("wss://api.upbit.com/websocket/v1"); // new 연산자를 사용하여 WebSocket 타입의 객체를 생성함.
-            socket1.binaryType = 'arraybuffer';
+		function upbit_funcname() { // 선언적 함수.
+            var socket1 = new WebSocket("wss://api.upbit.com/websocket/v1"); // new 연산자를 사용하여 WebSocket 타입의 객체를 생성과 동시에 연결.
 
-            socket1.onopen = function(e) {
-                const msg = '[{"ticket":"UNIQUE_TICKET"},{"type":"ticker","codes":["KRW-BTC"]}]';
+            socket1.binaryType = 'arraybuffer'; // 웹소켓의 바이너리 포맷을 arraybuffer로 선언. upbit의 기본 binaryType은 blob여서 event.data하면 blob객체가 반환됨.
+
+            socket1.onopen = function() {
+                const msg = '[ {"ticket":"UNIQUE_TICKET"}, {"type":"ticker","codes":["KRW-BTC"]} ]'; // 2개의 json 객체를 요소로 가지는 json 배열.
 
                 socket1.send(msg);
             }
 
-            socket1.onmessage = function(event) {
+            socket1.onmessage = function(event) { // event 객체는 자바스크립트에서 기본적으로 제공해 주는 객체.
                 
-                var enc = new TextDecoder("utf-8"); //// arraybuffer -> string
-                var arr = new Uint8Array(event.data);
-                var str_d = enc.decode(arr);
-                var tp = JSON.parse(str_d);
-                var upbit_krw = tp.trade_price;
-                
-                var str = document.getElementById("upbit_price");
-                str.innerHTML = upbit_krw;
-                $("#upbit_price").attr("price1", upbit_krw);
+                var arr = new Uint8Array(event.data); // Uinit8Array 객체를 만듬.
+                var str = new TextDecoder("utf-8").decode(arr); // arraybuffer -> string
+                // 이대로 출력하면 JSON 객체가 반환됨.
+
+                var js_object = JSON.parse(str); // JSON 객체를 자바스크립트 객체형식으로 변환.
+                var upbit_krw = js_object.trade_price; // 체결가
+                document.getElementById("upbit").innerHTML = upbit_krw
+
+                var upbit_scr = js_object.signed_change_rate*100; // 전일대비 등락율
+                var scr_str = document.getElementById("upbit_scr");
+                scr_str.innerHTML = upbit_scr.toFixed(2); // 소수점 둘째 자리까지 반올림.
+
+                $("#upbit").attr("upbit_pr", upbit_krw); // upbit_pr 속성값으로 upbit_krw를 지정.
             }
         }
 
-        function binance_funcname() {
+		upbit_funcname()
+
+		function binance_funcname() {
             var socket2 = new WebSocket("wss://stream.binance.com:9443/ws/btcusdt@trade");
 
             socket2.onmessage = function(event){
             var current_price = JSON.parse(event.data);
 
-            var binance_krw = Math.floor(current_price.p*exchange_rate);
+            var binance_usdt = Math.floor(current_price.p);
+            document.getElementById("binance").innerHTML = binance_usdt;
             
-            document.getElementById("binance_price").innerHTML = binance_krw;
-            document.getElementById("usdt").innerHTML = Math.floor(current_price.p);
+            $("#binance").attr("binance_pr", binance_usdt); // binance_pr 속성값으로 binance_usdt를 지정.
 
-            $("#binance_price").attr("price2", binance_krw);
-
-            }
+            document.title = Math.floor(current_price.p) + "usdt" // title에 바낸 비트코인 가격 표시.
+			}
         }
 
-        upbit_funcname()
-        binance_funcname()
-            
-            
+		binance_funcname()
+        
+        window.setInterval(function(){ // 바이낸스 usdt를 krw로 변환.
+            let cp_rates = $("#rates").attr("rates_pr"); // rates_pr 속성값을 cp_rates에 저장.
+            let cp_binance = $("#binance").attr("binance_pr");
+            let cp_binance_krw = Math.floor(cp_rates*cp_binance);
+
+            document.getElementById("binance_krw").innerHTML = cp_binance_krw;
+            $("#binance_krw").attr("binance_pr_krw", cp_binance_krw);
+        },10);
+
         window.setInterval(function(){
+            let upbit_price = $("#upbit").attr("upbit_pr");
+            let binance_price = $("#binance_krw").attr("binance_pr_krw");
                 
-                let upbit_price = $("#upbit_price").attr("price1");
-                let binance_price = $("#binance_price").attr("price2");
-                
-                let kimp = ((upbit_price-binance_price)/binance_price)*100;
-                document.getElementById("kimp").innerHTML = kimp.toFixed(2);
-               
-            },
-            100);
+            let kimp = ((upbit_price-binance_price)/binance_price)*100;
+            document.getElementById("kimp").innerHTML = kimp.toFixed(2);
 
-
-});
-
-
-
-    
-
-
+        },10);
+        
+    });
+	
 
 
 

@@ -1,33 +1,22 @@
 <!DOCTYPE html>
 {% load static %}
-<html lang="ko">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>김프</title>
-    <script src="{% static 'jquery-3.6.0.min.js' %}"></script>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<script src="{% static 'jquery-3.6.0.min.js' %}"></script>
     <link rel="stylesheet" href="{% static 'bitcoin.css' %}" media="screen">
+    <script src="{% static 'bitcoin.js' %}"></script>
 </head>
 <body>
-    <div>
-        업비트 비트코인 현재가 : <span id="upbit_price" price1="0"></span> krw
-    </div>
-
-    <div>
-        바이낸스 비트코인 현재가 : <span id="binance_price" price2="0"></span> krw (<span id="usdt"></span> usdt)
-    </div>
-
-    <div>
-        김프: <span id="kimp"></span> % 
-    </div>
-    
-    <div>
-        환율: <span id="rate"></span> krw 
-    </div>
-
-    <script src="{% static 'bitcoin.js' %}"></script>
-    
+	<div>환율: <span id="rates" rates_pr="0"></span>krw</div>
+	<div>업비트 비트코인:<span id="upbit" upbit_pr="0"></span>krw</div>
+    <div>업비트 비트코인 등락율: <span id="upbit_scr"></span> %</div>
+	<div>바이낸스 비트코인:<span id="binance" binance_pr="0"></span>usdt</div>
+    <div>바이낸스 비트코인:<span id="binance_krw" binance_pr_krw="0"></span>krw</div>
+    <div>김프:<span id="kimp"></span>%</div>
 </body>
 </html>
 
