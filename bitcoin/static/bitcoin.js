@@ -1,3 +1,4 @@
+//김프계산: (upbit_krw-krw_pr)/krw_pr*100;
 
 $(document).ready(function(){
     // 환율 api
@@ -30,13 +31,13 @@ $(document).ready(function(){
 
             var js_object = JSON.parse(str); // JSON 객체를 자바스크립트 객체형식으로 변환.
             var upbit_krw = js_object.trade_price; // 체결가
-            document.getElementById("upbit").innerHTML = upbit_krw
+            document.getElementById("upbit-btc").innerHTML = upbit_krw
 
             var upbit_scr = js_object.signed_change_rate*100; // 전일대비 등락율
-            var scr_str = document.getElementById("upbit_scr");
+            var scr_str = document.getElementById("upbit-btc-scr");
             scr_str.innerHTML = upbit_scr.toFixed(2); // 소수점 둘째 자리까지 반올림.
 
-            $("#upbit").attr("upbit_pr", upbit_krw); // upbit_pr 속성값으로 upbit_krw를 지정.
+            $("#upbit-btc").attr("upbit-btc-pr", upbit_krw); // upbit_pr 속성값으로 upbit_krw를 지정.
         }
     }
 
@@ -49,9 +50,9 @@ $(document).ready(function(){
         var current_price = JSON.parse(event.data);
 
         var binance_usdt = Math.floor(current_price.p);
-        document.getElementById("binance").innerHTML = binance_usdt;
+        document.getElementById("binance-btc").innerHTML = binance_usdt;
         
-        $("#binance").attr("binance_pr", binance_usdt); // binance_pr 속성값으로 binance_usdt를 지정.
+        $("#binance-btc").attr("binance-btc-pr", binance_usdt); // binance_pr 속성값으로 binance_usdt를 지정.
 
         document.title = Math.floor(current_price.p) + "usdt" // title에 바낸 비트코인 가격 표시.
 		}
@@ -61,13 +62,13 @@ $(document).ready(function(){
     
     // 김프 계산
     window.setInterval(function(){
-        let upbit = $("#upbit").attr("upbit_pr");
+        let upbit = $("#upbit-btc").attr("upbit-btc-pr");
         let rates = $("#rates").attr("rates_pr"); // rates_pr 속성값을 cp_rates에 저장.
-        let binance = $("#binance").attr("binance_pr");
+        let binance = $("#binance-btc").attr("binance-btc-pr");
         let binance_krw = Math.floor(rates*binance);
 
         let kimp = ((upbit-binance_krw)/binance_krw)*100;
-        document.getElementById("kimp").innerHTML = kimp.toFixed(2);
+        document.getElementById("btc-kimp").innerHTML = kimp.toFixed(2);
 
     },10);
     
@@ -77,4 +78,3 @@ $(document).ready(function(){
 
 
 
-//김프계산: (upbit_krw-krw_pr)/krw_pr*100;
