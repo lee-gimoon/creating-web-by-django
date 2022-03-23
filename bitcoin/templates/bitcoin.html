@@ -7,16 +7,18 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Document</title>
 	<script src="{% static 'jquery-3.6.0.min.js' %}"></script>
-    <link rel="stylesheet" href="{% static 'bitcoin.css' %}" media="screen">
+    <link rel="stylesheet" href="{% static 'bitcoin.css' %}?after" media="screen"> <!-- ?after를 쓰면 css파일 변경시 적용됨.-->
     <script src="{% static 'bitcoin.js' %}"></script>
 </head>
 <body>
-	<div>환율: <span id="rates" rates_pr="0"></span>krw</div>
-	<div>업비트 비트코인:<span id="upbit" upbit_pr="0"></span>krw</div>
-    <div>업비트 비트코인 등락율: <span id="upbit_scr"></span> %</div>
-	<div>바이낸스 비트코인:<span id="binance" binance_pr="0"></span>usdt</div>
-    <div>바이낸스 비트코인:<span id="binance_krw" binance_pr_krw="0"></span>krw</div>
-    <div>김프:<span id="kimp"></span>%</div>
+	<div class="big-container">
+		<div><p>업비트 비트코인 가격</p> <p><span id="upbit" upbit_pr="0"></span> krw</p></div>
+		<div><p>업비트 비트코인 등락율</p> <P><span id="upbit_scr"></span> %</P></div>
+		<div><p>바이낸스 비트코인 테더 가격</p> <P><span id="binance" binance_pr="0"></span> usdt</P></div>
+		<div><p>김프</p> <P><span id="kimp"></span> %</P></div>
+	</div>
+
+	<div id="krw-rates">원달러 환율: <span id="rates" rates_pr="0"></span>krw</div>
 </body>
 </html>
 
