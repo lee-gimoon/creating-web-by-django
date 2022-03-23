@@ -2,6 +2,22 @@ body {
     background-color: rgb(230, 245, 255);
 }
 
+#max-container {
+    
+    display: flex;
+    justify-content: center;
+}
+
+.side-box {
+    
+    flex: 1;
+}
+
+.center-box{
+    
+    flex: 4;
+}
+
 .big-container {
     width: 100%;
     height: 300px;
@@ -30,4 +46,9 @@ body {
     font-size: 30px;
     background-color: goldenrod;
     text-align: center;
+}
+
+.small {
+    font-size: 25px;
+    margin: 10px;
 }

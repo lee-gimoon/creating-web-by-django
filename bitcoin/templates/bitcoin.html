@@ -11,14 +11,54 @@
     <script src="{% static 'bitcoin.js' %}"></script>
 </head>
 <body>
-	<div class="big-container">
-		<div><p>업비트 비트코인 가격</p> <p><span id="upbit-btc" upbit-btc-pr="0"></span> krw</p></div>
-		<div><p>업비트 비트코인 등락율</p> <P><span id="upbit-btc-scr"></span> %</P></div>
-		<div><p>바이낸스 비트코인 테더 가격</p> <P><span id="binance-btc" binance-btc-pr="0"></span> usdt</P></div>
-		<div><p>김프</p> <P><span id="btc-kimp"></span> %</P></div>
-	</div>
+	<div id="max-container">
+		<div class="side-box"></div>
+			<div class="center-box">
+				<div class="big-container">
+					<div>
+						<p class="small">비트코인</p>
+						<p class="small">가격(upbit): <span id="upbit-btc" upbit-btc-pr="0"></span> krw</p>
+						<p class="small">등락율(upbit): <span id="upbit-btc-scr"></span> %</P>
+						<p class="small">가격(binance): <span id="binance-btc" binance-btc-pr="0"></span> usdt</p>
+						<p class="small">김프: <span id="btc-kimp"></span> %</p>
+					</div>
+					<div>
+						<p class="small">이더리움</p>
+						<p class="small">가격(upbit): <span id="upbit-eth" upbit-eth-pr="0"></span> krw</p>
+						<p class="small">등락율(upbit): <span id="upbit-eth-scr"></span> %</P>
+						<p class="small">가격(binance): <span id="binance-eth" binance-eth-pr="0"></span> usdt</p>
+						<p class="small">김프: <span id="eth-kimp"></span> %</p>
+					</div>
+					<div>
+						<p class="small">리플</p>
+						<p class="small">가격(upbit): <span id="upbit-xrp" upbit-xrp-pr="0"></span> krw</p>
+						<p class="small">등락율(upbit): <span id="upbit-xrp-scr"></span> %</P>
+						<p class="small">가격(binance): <span id="binance-xrp" binance-xrp-pr="0"></span> usdt</p>
+						<p class="small">김프: <span id="xrp-kimp"></span> %</p>
+					</div>
+					<div></div>
+				</div>
 
-	<div id="krw-rates">원달러 환율: <span id="rates" rates_pr="0"></span>krw</div>
+				<div class="big-container">
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+				</div>
+
+				<div class="big-container">
+					<div></div>
+					<div></div>
+					<div></div>
+					<div></div>
+				</div>
+
+			
+
+				<div id="krw-rates">원달러 환율: <span id="rates" rates_pr="0"></span>krw</div>
+			</div>
+		<div class="side-box"></div>
+	</div>
 </body>
 </html>
 
